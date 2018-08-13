@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Tic-Tac-Toe</string>
+    <string name="reset">Сброс</string>
+    <string name="Start_with">Начать с</string>
+    <string name="nought">ноликов</string>
+    <string name="cross">крестиков</string>
+</resources>
