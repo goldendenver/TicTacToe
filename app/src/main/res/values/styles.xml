@@ -11,7 +11,7 @@
         <item name="android:textSize">@dimen/buttonTextSize</item>
         <item name="android:layout_margin">@dimen/buttonMargin</item>
         <item name="android:background">@drawable/pressed_button</item>
+        <item name="android:contentDescription">""</item>
     </style>
-
 
 </resources>

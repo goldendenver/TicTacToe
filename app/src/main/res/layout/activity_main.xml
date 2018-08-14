@@ -20,7 +20,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.625">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,21 +30,21 @@
 
             <Button
                 android:id="@+id/button1"
+                style="@style/buttonStyle"
                 android:onClick="onButton1Click"
-                tools:text="1"
-                style="@style/buttonStyle" />
+                tools:text="1" />
 
             <Button
                 android:id="@+id/button2"
+                style="@style/buttonStyle"
                 android:onClick="onButton2Click"
-                tools:text="2"
-                style="@style/buttonStyle" />
+                tools:text="2" />
 
             <Button
                 android:id="@+id/button3"
+                style="@style/buttonStyle"
                 android:onClick="onButton3Click"
-                tools:text="3"
-                style="@style/buttonStyle" />
+                tools:text="3" />
         </LinearLayout>
 
         <LinearLayout
@@ -53,21 +54,21 @@
 
             <Button
                 android:id="@+id/button4"
+                style="@style/buttonStyle"
                 android:onClick="onButton4Click"
-                tools:text="4"
-                style="@style/buttonStyle" />
+                tools:text="4" />
 
             <Button
                 android:id="@+id/button5"
+                style="@style/buttonStyle"
                 android:onClick="onButton5Click"
-                tools:text="5"
-                style="@style/buttonStyle" />
+                tools:text="5" />
 
             <Button
                 android:id="@+id/button6"
+                style="@style/buttonStyle"
                 android:onClick="onButton6Click"
-                tools:text="6"
-                style="@style/buttonStyle" />
+                tools:text="6" />
         </LinearLayout>
 
         <LinearLayout
@@ -77,21 +78,21 @@
 
             <Button
                 android:id="@+id/button7"
+                style="@style/buttonStyle"
                 android:onClick="onButton7Click"
-                tools:text="7"
-                style="@style/buttonStyle" />
+                tools:text="7" />
 
             <Button
                 android:id="@+id/button8"
+                style="@style/buttonStyle"
                 android:onClick="onButton8Click"
-                tools:text="8"
-                style="@style/buttonStyle" />
+                tools:text="8" />
 
             <Button
                 android:id="@+id/button9"
+                style="@style/buttonStyle"
                 android:onClick="onButton9Click"
-                tools:text="9"
-                style="@style/buttonStyle" />
+                tools:text="9" />
         </LinearLayout>
     </LinearLayout>
 
@@ -99,12 +100,11 @@
         android:id="@+id/noughts_crosses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/Start_with"
-        android:textOn="@string/nought"
-        android:textOff="@string/cross"
-        app:layout_constraintBottom_toTopOf="@+id/bac"
+        android:textOff="@string/with_crosses"
+        android:textOn="@string/with_noughts"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -118,4 +118,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/score"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noughts_crosses" />
 </android.support.constraint.ConstraintLayout>
