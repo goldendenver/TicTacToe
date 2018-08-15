@@ -101,7 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/Start_with"
+        android:text="@string/start_with"
         android:textOff="@string/with_crosses"
         android:textOn="@string/with_noughts"
         app:layout_constraintEnd_toEndOf="parent"

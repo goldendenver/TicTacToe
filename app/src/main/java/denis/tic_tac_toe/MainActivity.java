@@ -3,6 +3,7 @@ package denis.tic_tac_toe;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.Menu;
@@ -10,9 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.lang.reflect.Array;
+import java.util.Locale;
 
 public class MainActivity extends Activity {
 
@@ -22,7 +27,6 @@ public class MainActivity extends Activity {
     TextView score;
     Switch noughtsCrosses;
     Button button1, button2, button3, button4, button5, button6, button7, button8, button9;
-    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,15 +164,13 @@ public class MainActivity extends Activity {
     // Начать игру с крестиков, если количесво кликов по кнопкам чётное,
     // начать игру с ноликов, если количесво кликов по кнопкам нечётное
     private void beginWithCrossesOrNoughts() {
-        // TODO Баг: ползунок на ноликах, но первым ставится крестик
+        // TODO Баг: ползунок на ноликах, но первым ставится крестик (вроде исправлено)
         // После сброса игры, свитч не реагирует на переключение
         if (noughtsCrosses.isChecked()) {
             clicksCount = 1;
-            //Toast.makeText(this, Integer.toString(clicksCount), Toast.LENGTH_SHORT).show();
         }
         else {
             clicksCount = 0;
-            //Toast.makeText(this, Integer.toString(clicksCount), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -210,19 +212,13 @@ public class MainActivity extends Activity {
         if ( b1_cr && b2_cr && b3_cr || b4_cr && b5_cr && b6_cr || b7_cr && b8_cr && b9_cr ||
              b1_cr && b4_cr && b7_cr || b2_cr && b5_cr && b8_cr || b3_cr && b6_cr && b9_cr ||
              b1_cr && b5_cr && b9_cr || b3_cr && b5_cr && b7_cr) {
-                builder = new AlertDialog.Builder(MainActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle(R.string.crosses_win);  // заголовок
                 builder.setPositiveButton(R.string.resume, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int arg1) {
                         reset();
                     }
                 });
-                /*builder.setNegativeButton(R.string.finish, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                });*/
                 builder.show();
 
                 button1.setEnabled(false);
@@ -245,19 +241,13 @@ public class MainActivity extends Activity {
         else if ( b1_nt && b2_nt && b3_nt || b4_nt && b5_nt && b6_nt || b7_nt && b8_nt && b9_nt ||
                   b1_nt && b4_nt && b7_nt || b2_nt && b5_nt && b8_nt || b3_nt && b6_nt && b9_nt ||
                   b1_nt && b5_nt && b9_nt || b3_nt && b5_nt && b7_nt) {
-                    builder = new AlertDialog.Builder(MainActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                     builder.setTitle(R.string.noughts_win);  // заголовок
                     builder.setPositiveButton(R.string.resume, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int arg1) {
                             reset();
                         }
                     });
-                    /*builder.setNegativeButton(R.string.finish, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finish();
-                        }
-                    });*/
                     builder.show();
 
                     button1.setEnabled(false);
@@ -278,7 +268,7 @@ public class MainActivity extends Activity {
 
         // ничья
         else if ( !b1 && !b2 && !b3 && !b4 && !b5 && !b6 && !b7 && !b8 && !b9 ) {
-            builder = new AlertDialog.Builder(MainActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setTitle(R.string.draw);  // заголовок
             builder.setPositiveButton(R.string.resume, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int arg1) {
@@ -294,18 +284,77 @@ public class MainActivity extends Activity {
     // Работа с меню
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 1, 0, R.string.clear_score);
+        menu.add(0, 0, 0, R.string.clear_score);
+        menu.add(0, 1, 0, R.string.choose_language);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == 1) {
-            // TODO localization
-            score.setText(R.string.score);
-            noughtsCountWins = 0;
-            crossesCountWins = 0;
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        switch (item.getItemId()) {
+            case 0:
+                score.setText(R.string.score);
+                noughtsCountWins = 0;
+                crossesCountWins = 0;
+                break;
+
+            case 1:
+                final String[] chooseLanguage = { "Русский", "English" };
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(R.string.choose_language);
+
+                // считываем текущую локаль
+                Locale current = getResources().getConfiguration().locale;
+
+                // устанавливаем переключатель в соотв-ии с текущей локалью
+                int checkedItem = 0;
+                if (String.valueOf(current).equals("ru")) {
+                    checkedItem = 0;
+                }
+                else if(String.valueOf(current).equals("en")) {
+                    checkedItem = 1;
+                }
+
+                // добавляем переключатели
+                builder.setSingleChoiceItems(chooseLanguage, checkedItem, null);
+
+                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int arg1) {
+
+                        //http://qaru.site/questions/5618887/alertdialog-builder-setsinglechoiceitems-from-enum
+                        ListView lw = ((AlertDialog) dialog).getListView();
+                        int checkedItemId = lw.getCheckedItemPosition();
+
+                        // русский
+                        if (checkedItemId == 0) {
+                            Locale locale = new Locale("ru");
+                            Locale.setDefault(locale);
+                            Configuration configuration = new Configuration();
+                            configuration.locale = locale;
+                            getBaseContext().getResources().updateConfiguration(configuration, null);
+
+                            noughtsCrosses.setText(R.string.start_with);
+                            recreate();
+                        }
+
+                        // английский
+                        else if (checkedItemId == 1) {
+                            Locale locale = new Locale("en");
+                            Locale.setDefault(locale);
+                            Configuration configuration = new Configuration();
+                            configuration.locale = locale;
+                            getBaseContext().getResources().updateConfiguration(configuration, null);
+
+                            noughtsCrosses.setText(R.string.start_with);
+                            recreate();
+                        }
+                    }
+                });
+                builder.setNegativeButton(R.string.cancel, null);
+                builder.show();
+                break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }

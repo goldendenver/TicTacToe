@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Tic-Tac-Toe</string>
+    <string name="app_name">Крестики-нолики</string>
     <string name="reset">Начать заново</string>
-    <string name="Start_with">Начать с</string>
+    <string name="start_with">Начать с</string>
     <string name="with_noughts">ноликов</string>
     <string name="with_crosses">крестиков</string>
     <string name="noughts">нолики</string>
@@ -13,4 +13,7 @@
     <string name="draw">Ничья!</string>
     <string name="score">крестики <b>0\t :\t 0</b> нолики</string>
     <string name="clear_score">Обнулить счёт</string>
+    <string name="choose_language">Выбрать язык</string>
+    <string name="cancel">Отмена</string>
+    <string name="ok">OK</string>
 </resources>
