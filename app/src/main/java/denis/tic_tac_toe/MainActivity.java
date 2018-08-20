@@ -9,14 +9,14 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.Locale;
 
 public class MainActivity extends Activity {
@@ -155,6 +155,16 @@ public class MainActivity extends Activity {
         button8.setContentDescription("");
         button9.setContentDescription("");
 
+        button1.clearAnimation();
+        button2.clearAnimation();
+        button3.clearAnimation();
+        button4.clearAnimation();
+        button5.clearAnimation();
+        button6.clearAnimation();
+        button7.clearAnimation();
+        button8.clearAnimation();
+        button9.clearAnimation();
+
         beginWithCrossesOrNoughts();
 
         noughtsCrosses.setEnabled(true);
@@ -164,8 +174,6 @@ public class MainActivity extends Activity {
     // Начать игру с крестиков, если количесво кликов по кнопкам чётное,
     // начать игру с ноликов, если количесво кликов по кнопкам нечётное
     private void beginWithCrossesOrNoughts() {
-        // TODO Баг: ползунок на ноликах, но первым ставится крестик (вроде исправлено)
-        // После сброса игры, свитч не реагирует на переключение
         if (noughtsCrosses.isChecked()) {
             clicksCount = 1;
         }
@@ -231,9 +239,8 @@ public class MainActivity extends Activity {
                 button8.setEnabled(false);
                 button9.setEnabled(false);
 
-                // TODO localization
                 score.setText(Html.fromHtml(getResources().getString(R.string.crosses) +
-                        " <b>" + ++crossesCountWins + "\t :\t" +
+                        " <b>" + ++crossesCountWins + "\t :\t " +
                         noughtsCountWins + "</b> " + getResources().getString(R.string.noughts)));
         }
 
@@ -260,7 +267,6 @@ public class MainActivity extends Activity {
                     button8.setEnabled(false);
                     button9.setEnabled(false);
 
-                    // TODO localization
                     score.setText(Html.fromHtml(getResources().getString(R.string.crosses)
                             + " <b>" + crossesCountWins + "\t :\t " +
                             ++noughtsCountWins + "</b> " + getResources().getString(R.string.noughts)));
@@ -276,6 +282,50 @@ public class MainActivity extends Activity {
                 }
             });
             builder.show();
+        }
+
+        // Анимация выигрышной комбинации (для кнопок)
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.rotation);;
+
+        if (b1_cr && b2_cr && b3_cr || b1_nt && b2_nt && b3_nt) {
+            button1.startAnimation(animation);
+            button2.startAnimation(animation);
+            button3.startAnimation(animation);
+        }
+        else if (b4_cr && b5_cr && b6_cr || b4_nt && b5_nt && b6_nt) {
+            button4.startAnimation(animation);
+            button5.startAnimation(animation);
+            button6.startAnimation(animation);
+        }
+        else if (b7_cr && b8_cr && b9_cr || b7_nt && b8_nt && b9_nt) {
+            button7.startAnimation(animation);
+            button8.startAnimation(animation);
+            button9.startAnimation(animation);
+        }
+        else if (b1_cr && b4_cr && b7_cr || b1_nt && b4_nt && b7_nt) {
+            button1.startAnimation(animation);
+            button4.startAnimation(animation);
+            button7.startAnimation(animation);
+        }
+        else if (b2_cr && b5_cr && b8_cr || b2_nt && b5_nt && b8_nt) {
+            button2.startAnimation(animation);
+            button5.startAnimation(animation);
+            button8.startAnimation(animation);
+        }
+        else if (b3_cr && b6_cr && b9_cr || b3_nt && b6_nt && b9_nt) {
+            button3.startAnimation(animation);
+            button6.startAnimation(animation);
+            button9.startAnimation(animation);
+        }
+        else if (b1_cr && b5_cr && b9_cr || b1_nt && b5_nt && b9_nt) {
+            button1.startAnimation(animation);
+            button5.startAnimation(animation);
+            button9.startAnimation(animation);
+        }
+        else if (b3_cr && b5_cr && b7_cr || b3_nt && b5_nt && b7_nt) {
+            button3.startAnimation(animation);
+            button5.startAnimation(animation);
+            button7.startAnimation(animation);
         }
 
     }
