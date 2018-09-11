@@ -10,7 +10,7 @@
     <string name="resume">Continue?</string>
     <string name="crosses_win">Crosses win</string>
     <string name="noughts_win">Noughts win</string>
-    <string name="draw">Draw</string>
+    <string name="draw">Draw!</string>
     <string name="score">crosses <b>0\t :\t 0</b> noughts</string>
     <string name="clear_score">Clear score</string>
     <string name="choose_language">Choose language</string>
