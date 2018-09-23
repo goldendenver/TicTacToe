@@ -7,6 +7,30 @@
     tools:context=".MainActivity">
 
 
+    <Switch
+        android:id="@+id/noughts_crosses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/start_with"
+        android:textOff="@string/with_crosses"
+        android:textOn="@string/with_noughts"
+        android:thumb="@android:color/holo_blue_bright"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/score"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noughts_crosses" />
+
     <LinearLayout
         android:id="@+id/bac"
         android:layout_width="wrap_content"
@@ -96,18 +120,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <Switch
-        android:id="@+id/noughts_crosses"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/start_with"
-        android:textOff="@string/with_crosses"
-        android:textOn="@string/with_noughts"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/resetButton"
         android:layout_width="wrap_content"
@@ -118,17 +130,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/score"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noughts_crosses" />
 
 
 </android.support.constraint.ConstraintLayout>

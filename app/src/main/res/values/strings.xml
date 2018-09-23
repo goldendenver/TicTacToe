@@ -14,6 +14,7 @@
     <string name="score">крестики <b>0\t :\t 0</b> нолики</string>
     <string name="clear_score">Обнулить счёт</string>
     <string name="choose_language">Выбрать язык</string>
+    <string name="change_language">При смене языка счёт игры будет обнулён</string>
     <string name="cancel">Отмена</string>
     <string name="ok">OK</string>
 </resources>

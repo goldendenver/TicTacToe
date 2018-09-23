@@ -33,6 +33,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // устанавливаем заголовок приложения в соотв-ии с текущей локалью
+        setTitle(R.string.app_name);
+
         score = findViewById(R.id.score);
 
         noughtsCrosses = findViewById(R.id.noughts_crosses);
@@ -69,6 +72,7 @@ public class MainActivity extends Activity {
 
         if (clicksCount > 0) {
             noughtsCrosses.setEnabled(false);
+            noughtsCrosses.setThumbResource(android.R.color.darker_gray);
         }
     }
 
@@ -168,6 +172,7 @@ public class MainActivity extends Activity {
         beginWithCrossesOrNoughts();
 
         noughtsCrosses.setEnabled(true);
+        noughtsCrosses.setThumbResource(android.R.color.holo_blue_bright);
     }
 
 
@@ -351,7 +356,8 @@ public class MainActivity extends Activity {
             case 1:
                 final String[] chooseLanguage = { "Русский", "English" };
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle(R.string.choose_language);
+                builder.setTitle(R.string.change_language);
+
 
                 // считываем текущую локаль
                 Locale current = getResources().getConfiguration().locale;
@@ -376,27 +382,32 @@ public class MainActivity extends Activity {
                         int checkedItemId = lw.getCheckedItemPosition();
 
                         // русский
-                        if (checkedItemId == 0) {
+                        if (checkedItemId == 0 && !(String.valueOf(getResources().getConfiguration().locale).equals("ru"))) {
                             Locale locale = new Locale("ru");
                             Locale.setDefault(locale);
                             Configuration configuration = new Configuration();
                             configuration.locale = locale;
                             getBaseContext().getResources().updateConfiguration(configuration, null);
 
-                            noughtsCrosses.setText(R.string.start_with);
                             recreate();
+                            // заголовок элемента switch не меняется почему-то после смены локали,
+                            // поэтому меняем его программно
+                            noughtsCrosses.setText(R.string.start_with);
                         }
 
                         // английский
-                        else if (checkedItemId == 1) {
+                        else if (checkedItemId == 1 && !(String.valueOf(getResources().getConfiguration().locale).equals("en"))) {
                             Locale locale = new Locale("en");
                             Locale.setDefault(locale);
                             Configuration configuration = new Configuration();
                             configuration.locale = locale;
                             getBaseContext().getResources().updateConfiguration(configuration, null);
 
-                            noughtsCrosses.setText(R.string.start_with);
                             recreate();
+                            // заголовок элемента switch не меняется почему-то после смены локали,
+                            // поэтому меняем его программно
+                            noughtsCrosses.setText(R.string.start_with);
+
                         }
                     }
                 });
